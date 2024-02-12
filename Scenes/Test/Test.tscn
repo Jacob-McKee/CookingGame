@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://ehw3qeiyjoeb"]
+
+[ext_resource type="PackedScene" uid="uid://dqs1r1xhedtpk" path="res://Scenes/Players/player.tscn" id="1_6juxo"]
+[ext_resource type="PackedScene" uid="uid://dte27indhvtv8" path="res://Assets - Kenney/SmallBuilding1.glb" id="2_frxj3"]
+[ext_resource type="PackedScene" uid="uid://ce4eokd4gp2yj" path="res://Assets - Kenney/Furniture/kitchenCabinet.glb" id="3_5u75i"]
+[ext_resource type="PackedScene" uid="uid://c1j6x8tivxt5i" path="res://Assets - Kenney/Furniture/floorFull.glb" id="5_nyxer"]
+[ext_resource type="PackedScene" uid="uid://bg4tkxthe36wi" path="res://Assets - Kenney/Furniture/wall.glb" id="6_fl1au"]
+[ext_resource type="PackedScene" uid="uid://cssc3oud03yt" path="res://Scenes/Assets/FoodBarrel.tscn" id="6_rkao7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5nic1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e4ap3"]
+albedo_color = Color(0.490196, 0.462745, 0.466667, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_txoc6"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ornsv"]
+sky_top_color = Color(0, 0.478431, 0.709804, 1)
+sky_horizon_color = Color(0.0666667, 0.701961, 1, 1)
+
+[sub_resource type="Sky" id="Sky_lmn1y"]
+sky_material = SubResource("ProceduralSkyMaterial_ornsv")
+
+[sub_resource type="Environment" id="Environment_2ckqu"]
+background_mode = 2
+sky = SubResource("Sky_lmn1y")
+ambient_light_color = Color(1, 1, 1, 1)
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
+mesh = SubResource("PlaneMesh_5nic1")
+surface_material_override/0 = SubResource("StandardMaterial3D_e4ap3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_txoc6")
+
+[node name="Player" parent="." instance=ExtResource("1_6juxo")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.737914, 0.674895, 0, -0.674895, 0.737914, 0, 6.72384, 5.21972)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2ckqu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.472412, 0.881378, 0, -0.881378, 0.472412, 0, 10.2913, 0)
+
+[node name="Scenery" type="Node3D" parent="."]
+
+[node name="SmallBuilding1" parent="Scenery" instance=ExtResource("2_frxj3")]
+transform = Transform3D(-3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, 12.9363, 0, -4.38371)
+
+[node name="SmallBuilding2" parent="Scenery" instance=ExtResource("2_frxj3")]
+transform = Transform3D(-3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, -7.54145, 0, -4.38371)
+
+[node name="Kitchen" type="Node3D" parent="."]
+
+[node name="kitchenCabinet" parent="Kitchen" instance=ExtResource("3_5u75i")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2, 0, -5)
+
+[node name="kitchenCabinet2" parent="Kitchen" instance=ExtResource("3_5u75i")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.75, 0, -5)
+
+[node name="kitchenCabinet3" parent="Kitchen" instance=ExtResource("3_5u75i")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0.5, 0, -5)
+
+[node name="kitchenCabinet4" parent="Kitchen" instance=ExtResource("3_5u75i")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.75, 0, -5)
+
+[node name="kitchenCabinet5" parent="Kitchen" instance=ExtResource("3_5u75i")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, -5)
+
+[node name="Building" type="Node3D" parent="."]
+
+[node name="floorFull" parent="Building" instance=ExtResource("5_nyxer")]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, -5.3452, 0, 3.38694)
+
+[node name="wall" parent="Building" instance=ExtResource("6_fl1au")]
+transform = Transform3D(-4.3484e-07, 0, -4, 0, 4, 0, 9.94799, 0, -1.74846e-07, -5.33398, 0, -6.59267)
+
+[node name="wall2" parent="Building" instance=ExtResource("6_fl1au")]
+transform = Transform3D(-4.3484e-07, 0, -4, 0, 4, 0, 9.94799, 0, -1.74846e-07, 4.46989, 9.53674e-07, -6.59193)
+
+[node name="wall3" parent="Building" instance=ExtResource("6_fl1au")]
+transform = Transform3D(-9.77999, 0, 0.012567, 0, 4, 0, -0.030725, 0, -4.00017, 4.46989, 9.53674e-07, -6.59193)
+
+[node name="FoodBarrel" parent="." instance=ExtResource("6_rkao7")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -2.75, 0, -5.5)
+
+[editable path="Kitchen/kitchenCabinet"]

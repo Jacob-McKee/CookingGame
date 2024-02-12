@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqs1r1xhedtpk"]
+
+[ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_fiiti"]
+[ext_resource type="Material" uid="uid://b7ute201bhw7y" path="res://Materials/WhiteSkinTone.tres" id="2_nw6x6"]
+[ext_resource type="Script" path="res://Scripts/Player/FindObjectRay.gd" id="3_s00cx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ygcuo"]
+height = 1.76075
+
+[sub_resource type="SphereMesh" id="SphereMesh_kyrot"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ng7ha"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m8fj6"]
+albedo_color = Color(0.188235, 0.603922, 0.65098, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_h03id"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_fiiti")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.880119, 0)
+shape = SubResource("CapsuleShape3D_ygcuo")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="Head" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.40722, 0)
+mesh = SubResource("SphereMesh_kyrot")
+skeleton = NodePath("../Body")
+surface_material_override/0 = ExtResource("2_nw6x6")
+
+[node name="Body" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 0.582556, 0, 0, 0, 1, 0, 0.591974, 0)
+mesh = SubResource("CapsuleMesh_ng7ha")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_m8fj6")
+
+[node name="RightHand" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.41622, 0.698086, 0.580186)
+mesh = SubResource("SphereMesh_h03id")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_nw6x6")
+
+[node name="LeftHand" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.410663, 0.698086, 0.580186)
+mesh = SubResource("SphereMesh_h03id")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_nw6x6")
+
+[node name="RayCast3D" type="RayCast3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.303994, 0.56929)
+hit_from_inside = true
+collide_with_areas = true
+script = ExtResource("3_s00cx")
+
+[node name="HeldItemNode" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.658163, 0.789875)
