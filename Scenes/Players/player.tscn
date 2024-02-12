@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dqs1r1xhedtpk"]
 
-[ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_fiiti"]
+[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_fiiti"]
 [ext_resource type="Material" uid="uid://b7ute201bhw7y" path="res://Materials/WhiteSkinTone.tres" id="2_nw6x6"]
 [ext_resource type="Script" path="res://Scripts/Player/FindObjectRay.gd" id="3_s00cx"]
 

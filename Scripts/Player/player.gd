@@ -1,10 +1,10 @@
 extends CharacterBody3D
 
-
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+@export var ID = 1
 
 @onready var player_body = $Body
 
@@ -16,7 +16,7 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir = Input.get_vector("left" + str(ID), "right" + str(ID), "up" + str(ID), "down" + str(ID))
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if direction:
